@@ -9,9 +9,10 @@ An improved zookeeper inspector
 - Add a dropdown menu to show the last 10 successfully connected zookeeper addresses
 - Support text search in node data viewer
 - Support read-only mode for node data viewer
+- This version (forked here) adds syntax highlighting capability using RSyntaxArea 
 
 Build
-- $git clone https://github.com/zzhang5/zooinspector.git
+- $git clone https://github.com/CycleMost/zooinspector.git
 - $cd zooinspector/
 - $mvn clean package
 
