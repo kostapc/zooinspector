@@ -9,7 +9,7 @@ An improved zookeeper inspector
 - Add a dropdown menu to show the last 10 successfully connected zookeeper addresses
 - Support text search in node data viewer
 - Support read-only mode for node data viewer
-- 支持访问zookeeper加密节点
+- 支持访问zookeeper加密节点 2017/10/2 mrc
 
 Build
 - $git clone https://github.com/tsmairc/zooinspector.git
