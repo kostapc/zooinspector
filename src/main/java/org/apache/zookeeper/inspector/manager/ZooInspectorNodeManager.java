@@ -18,16 +18,15 @@
 package org.apache.zookeeper.inspector.manager;
 
 /**
- * A Manager for all interactions between the application and the nodes in a
- * Zookeeper instance
- * */
-public interface ZooInspectorNodeManager extends ZooInspectorReadOnlyManager {
-    /**
-     * @param nodePath
-     *            - the path to the node on which to set the data
-     * @param data
-     *            - the data to set on the this node
-     * @return true if the data for the node was successfully updated
-     */
-    public boolean setData(String nodePath, String data);
+ * A Manager for all interactions between the application and the nodes in a Zookeeper instance
+ */
+public interface ZooInspectorNodeManager extends ZooInspectorReadOnlyManager{
+	/**
+	 * @param nodePath
+	 *            - the path to the node on which to set the data
+	 * @param data
+	 *            - the data to set on the this node
+	 * @return true if the data for the node was successfully updated
+	 */
+	public boolean setData(String nodePath, String data);
 }

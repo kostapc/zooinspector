@@ -22,16 +22,14 @@ import java.util.Map;
 /**
  * A Listener for Events on zookeeper nodes
  */
-public interface NodeListener {
-    /**
-     * @param nodePath
-     *            - the path of the node
-     * @param eventType
-     *            - the event type
-     * @param eventInfo
-     *            - a {@link Map} containing any other information about this
-     *            event
-     */
-    public void processEvent(String nodePath, String eventType,
-            Map<String, String> eventInfo);
+public interface NodeListener{
+	/**
+	 * @param nodePath
+	 *            - the path of the node
+	 * @param eventType
+	 *            - the event type
+	 * @param eventInfo
+	 *            - a {@link Map} containing any other information about this event
+	 */
+	public void processEvent(String nodePath, String eventType, Map<String, String> eventInfo);
 }

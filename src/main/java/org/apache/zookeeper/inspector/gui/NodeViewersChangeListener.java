@@ -24,14 +24,12 @@ import org.apache.zookeeper.inspector.gui.nodeviewer.ZooInspectorNodeViewer;
 /**
  * A Listener for changes to the configuration of which node viewers are shown
  */
-public interface NodeViewersChangeListener {
-    /**
-     * Called when the node viewers configuration is changed (i.e node viewers
-     * are added, removed or the order of the node viewers is changed)
-     * 
-     * @param newViewers
-     *            - a {@link List} of {@link ZooInspectorNodeViewer}s which are
-     *            to be shown
-     */
-    public void nodeViewersChanged(List<ZooInspectorNodeViewer> newViewers);
+public interface NodeViewersChangeListener{
+	/**
+	 * Called when the node viewers configuration is changed (i.e node viewers are added, removed or the order of the node viewers is changed)
+	 * 
+	 * @param newViewers
+	 *            - a {@link List} of {@link ZooInspectorNodeViewer}s which are to be shown
+	 */
+	public void nodeViewersChanged(List<ZooInspectorNodeViewer> newViewers);
 }

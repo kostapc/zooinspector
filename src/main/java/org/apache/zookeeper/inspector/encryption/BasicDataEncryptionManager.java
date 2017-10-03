@@ -20,36 +20,30 @@ package org.apache.zookeeper.inspector.encryption;
 /**
  *
  */
-public class BasicDataEncryptionManager implements DataEncryptionManager {
-
-    /*
-     * (non-Javadoc)
-     *
-     * @see
-     * org.apache.zookeeper.inspector.encryption.DataEncryptionManager#decryptData
-     * (byte[])
-     */
-    @Override
-    public String decryptData(byte[] encrypted) throws Exception {
-      if (encrypted == null) {
-        return null;
-      }
-      return new String(encrypted);
-    }
-
-    /*
-     * (non-Javadoc)
-     *
-     * @see
-     * org.apache.zookeeper.inspector.encryption.DataEncryptionManager#encryptData
-     * (java.lang.String)
-     */
-    @Override
-    public byte[] encryptData(String data) throws Exception {
-        if (data == null) {
-            return new byte[0];
-        }
-        return data.getBytes();
-    }
-
+public class BasicDataEncryptionManager implements DataEncryptionManager{
+	
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see org.apache.zookeeper.inspector.encryption.DataEncryptionManager#decryptData (byte[])
+	 */
+	public String decryptData(byte[] encrypted) throws Exception{
+		if(encrypted == null){
+			return null;
+		}
+		return new String(encrypted);
+	}
+	
+	/*
+	 * (non-Javadoc)
+	 *
+	 * @see org.apache.zookeeper.inspector.encryption.DataEncryptionManager#encryptData (java.lang.String)
+	 */
+	public byte[] encryptData(String data) throws Exception{
+		if(data == null){
+			return new byte[0];
+		}
+		return data.getBytes();
+	}
+	
 }

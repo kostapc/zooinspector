@@ -20,20 +20,20 @@ package org.apache.zookeeper.inspector.encryption;
 /**
  * A class which describes how data should be encrypted and decrypted
  */
-public interface DataEncryptionManager {
-    /**
-     * @param data
-     *            - the data to be encrypted
-     * @return the encrypted data
-     * @throws Exception
-     */
-    public byte[] encryptData(String data) throws Exception;
-
-    /**
-     * @param encrypted
-     *            - the data to be decrypted
-     * @return the decrypted data
-     * @throws Exception
-     */
-    public String decryptData(byte[] encrypted) throws Exception;
+public interface DataEncryptionManager{
+	/**
+	 * @param data
+	 *            - the data to be encrypted
+	 * @return the encrypted data
+	 * @throws Exception
+	 */
+	public byte[] encryptData(String data) throws Exception;
+	
+	/**
+	 * @param encrypted
+	 *            - the data to be decrypted
+	 * @return the decrypted data
+	 * @throws Exception
+	 */
+	public String decryptData(byte[] encrypted) throws Exception;
 }

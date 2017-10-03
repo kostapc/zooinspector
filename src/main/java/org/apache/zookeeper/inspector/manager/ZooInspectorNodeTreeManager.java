@@ -18,26 +18,24 @@
 package org.apache.zookeeper.inspector.manager;
 
 /**
- * A Manager for all interactions between the application and the node tree in a
- * Zookeeper instance
+ * A Manager for all interactions between the application and the node tree in a Zookeeper instance
  */
-public interface ZooInspectorNodeTreeManager extends
-        ZooInspectorReadOnlyManager {
-
-    /**
-     * @param parent
-     *            - the parent node path for the node to add
-     * @param nodeName
-     *            - the name of the new node
-     * @return true if the node was successfully created
-     */
-    public abstract boolean createNode(String parent, String nodeName);
-
-    /**
-     * @param nodePath
-     *            - the path to the node to delete
-     * @return true if the node was successfully deleted
-     */
-    public abstract boolean deleteNode(String nodePath);
-
+public interface ZooInspectorNodeTreeManager extends ZooInspectorReadOnlyManager{
+	
+	/**
+	 * @param parent
+	 *            - the parent node path for the node to add
+	 * @param nodeName
+	 *            - the name of the new node
+	 * @return true if the node was successfully created
+	 */
+	public abstract boolean createNode(String parent, String nodeName);
+	
+	/**
+	 * @param nodePath
+	 *            - the path to the node to delete
+	 * @return true if the node was successfully deleted
+	 */
+	public abstract boolean deleteNode(String nodePath);
+	
 }

@@ -23,16 +23,14 @@ import org.apache.log4j.Logger;
  * Provides a {@link Logger} for use across the entire application
  * 
  */
-public class LoggerFactory
-{
+public class LoggerFactory{
 	private static final Logger logger = Logger.getLogger("org.apache.zookeeper.inspector"); //$NON-NLS-1$
-
+	
 	/**
 	 * @return {@link Logger} for ZooInspector
 	 */
-	public static Logger getLogger()
-	{
+	public static Logger getLogger(){
 		return logger;
 	}
-
+	
 }
