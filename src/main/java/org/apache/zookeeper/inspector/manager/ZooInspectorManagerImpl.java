@@ -80,6 +80,7 @@ public class ZooInspectorManagerImpl implements ZooInspectorManager{
 	private static final String ACL_ID = "Id";
 	private static final String SESSION_STATE = "Session State";
 	private static final String SESSION_ID = "Session ID";
+	private static final String Client = "zookeeper.sasl.clientconfig";
 	/**
 	 * The key used for the connect string in the connection properties file
 	 */
@@ -150,6 +151,7 @@ public class ZooInspectorManagerImpl implements ZooInspectorManager{
 				String encryptionManager = connectionProps.getProperty(DATA_ENCRYPTION_MANAGER);
 				String username = connectionProps.getProperty(USERNAME);
 				String password = connectionProps.getProperty(PASSWORD);
+				String client = connectionProps.getProperty(Client);
 				if(connectString == null || sessionTimeout == null){
 					throw new IllegalArgumentException("Both connect string and session timeout are required.");
 				}
@@ -181,7 +183,15 @@ public class ZooInspectorManagerImpl implements ZooInspectorManager{
 					}
 				});
 				if(StringUtils.isNotBlank(username) && StringUtils.isNotBlank(password)){
-					((ZooKeeperRetry)this.zooKeeper).addAuthInfo("digest", (username.trim() + ":" + password.trim()).getBytes());
+					String os = System.getProperty("os.name");  
+					if(os.toLowerCase().startsWith("win")){
+						System.setProperty("java.security.auth.login.config", "C:\\Users\\abc");
+					}
+					else{
+						System.setProperty("java.security.auth.login.config", "/Users/abc");
+					}
+					System.setProperty("zookeeper.sasl.clientconfig", client);
+					//((ZooKeeperRetry)this.zooKeeper).addAuthInfo("digest", (username.trim() + ":" + password.trim()).getBytes());
 				}
 				((ZooKeeperRetry)this.zooKeeper).setRetryLimit(10);
 				// System.out.println("[START] connected took: " + (System.currentTimeMillis() - start));
@@ -694,6 +704,7 @@ public class ZooInspectorManagerImpl implements ZooInspectorManager{
 		template.put(DATA_ENCRYPTION_MANAGER, Arrays.asList(new String[] { defaultEncryptionManager }));
 		template.put(USERNAME, Arrays.asList(""));
 		template.put(PASSWORD, Arrays.asList(""));
+		template.put(Client, Arrays.asList("Client"));
 		
 		Map<String, String> labels = new LinkedHashMap<String, String>();
 		labels.put(CONNECT_STRING, "Connect String");
@@ -701,6 +712,7 @@ public class ZooInspectorManagerImpl implements ZooInspectorManager{
 		labels.put(DATA_ENCRYPTION_MANAGER, "Data Encryption Manager");
 		labels.put(USERNAME, "username");
 		labels.put(PASSWORD, "password");
+		labels.put(Client, "zookeeper.sasl.clientconfig");
 		return new Pair<Map<String, List<String>>, Map<String, String>>(template, labels);
 	}
 	
