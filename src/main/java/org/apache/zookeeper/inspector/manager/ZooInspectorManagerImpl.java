@@ -142,7 +142,7 @@ public class ZooInspectorManagerImpl implements ZooInspectorManager
    * .util.Properties)
    */
   @Override
-  public boolean connect(Properties connectionProps)
+  public boolean connect(Properties connectionProps, Watcher watcher)
   {
     connected = false;
     try
@@ -198,6 +198,7 @@ public class ZooInspectorManagerImpl implements ZooInspectorManager
 //        System.out.println("[START] connected took: " + (System.currentTimeMillis() - start));
 
         connected = ((ZooKeeperRetry) this.zooKeeper).testConnection();
+        zooKeeper.register(watcher);
       }
     }
     catch (Exception e)

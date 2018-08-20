@@ -34,6 +34,8 @@ import javax.swing.JSplitPane;
 import javax.swing.JToolBar;
 import javax.swing.SwingWorker;
 
+import org.apache.zookeeper.WatchedEvent;
+import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooKeeper.States;
 import org.apache.zookeeper.inspector.gui.nodeviewer.ZooInspectorNodeViewer;
 import org.apache.zookeeper.inspector.logger.LoggerFactory;
@@ -272,7 +274,23 @@ public class ZooInspectorPanel extends JPanel implements
             @Override
             protected Boolean doInBackground() throws Exception {
                 zooInspectorManager.setLastConnectionProps(connectionProps);
-                return zooInspectorManager.connect(connectionProps);
+                return zooInspectorManager.connect(connectionProps, new Watcher() {
+                    @Override
+                    public void process(WatchedEvent event) {
+                        if(event.getState() == Event.KeeperState.Disconnected){
+                            treeViewer.refreshView();
+                            connectButton.setEnabled(true);
+                            disconnectButton.setEnabled(false);
+                            refreshButton.setEnabled(false);
+                            addNodeButton.setEnabled(false);
+                            deleteNodeButton.setEnabled(false);
+                            nodeViewersPanel.setEnabled(false);
+                            JOptionPane.showMessageDialog(null,
+                                    "lost connection to zookeeper", "Error",
+                                    JOptionPane.ERROR_MESSAGE);
+                        }
+                    }
+                });
             }
 
             @Override

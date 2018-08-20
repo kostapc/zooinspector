@@ -17,6 +17,7 @@
  */
 package org.apache.zookeeper.inspector.manager;
 
+import org.apache.zookeeper.Watcher;
 import java.io.File;
 import java.io.IOException;
 import java.util.Collection;
@@ -38,7 +39,7 @@ public interface ZooInspectorManager extends ZooInspectorNodeManager,
      * @param connectionProps
      * @return true if successfully connected
      */
-    public boolean connect(Properties connectionProps);
+    public boolean connect(Properties connectionProps, Watcher watcher);
 
     /**
      * @return true if successfully disconnected
