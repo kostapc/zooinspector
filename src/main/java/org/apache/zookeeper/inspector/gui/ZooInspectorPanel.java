@@ -17,7 +17,7 @@
  */
 package org.apache.zookeeper.inspector.gui;
 
-import java.awt.BorderLayout;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -37,6 +37,7 @@ import javax.swing.SwingWorker;
 import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooKeeper.States;
+import org.apache.zookeeper.inspector.ZooInspector;
 import org.apache.zookeeper.inspector.gui.nodeviewer.ZooInspectorNodeViewer;
 import org.apache.zookeeper.inspector.logger.LoggerFactory;
 import org.apache.zookeeper.inspector.manager.ZooInspectorManager;
@@ -44,8 +45,7 @@ import org.apache.zookeeper.inspector.manager.ZooInspectorManager;
 /**
  * The parent {@link JPanel} for the whole application
  */
-public class ZooInspectorPanel extends JPanel implements
-        NodeViewersChangeListener {
+public class ZooInspectorPanel extends JPanel implements NodeViewersChangeListener {
     private final JButton refreshButton;
     private final JButton disconnectButton;
     private final JButton connectButton;
@@ -56,6 +56,7 @@ public class ZooInspectorPanel extends JPanel implements
     private final JButton deleteNodeButton;
     private final JButton nodeViewersButton;
     private final JButton aboutButton;
+    //private final JButton exportButton;
     private final List<NodeViewersChangeListener> listeners = new ArrayList<NodeViewersChangeListener>();
     {
         listeners.add(this);
@@ -98,24 +99,23 @@ public class ZooInspectorPanel extends JPanel implements
                     "Error loading default node viewers: " + ex.getMessage(),
                     "Error", JOptionPane.ERROR_MESSAGE);
         }
-        nodeViewersPanel = new ZooInspectorNodeViewersPanel(
-                zooInspectorManager, nodeViewers);
-        treeViewer = new ZooInspectorTreeViewer(ZooInspectorPanel.this, zooInspectorManager,
-                nodeViewersPanel);
+        nodeViewersPanel = new ZooInspectorNodeViewersPanel(zooInspectorManager, nodeViewers);
+        treeViewer = new ZooInspectorTreeViewer(
+            ZooInspectorPanel.this,
+            zooInspectorManager,
+            nodeViewersPanel
+        );
         this.setLayout(new BorderLayout());
         JToolBar toolbar = new JToolBar();
         toolbar.setFloatable(false);
         connectButton = new JButton(ZooInspectorIconResources.getConnectIcon());
-        disconnectButton = new JButton(ZooInspectorIconResources
-                .getDisconnectIcon());
+        disconnectButton = new JButton(ZooInspectorIconResources.getDisconnectIcon());
         refreshButton = new JButton(ZooInspectorIconResources.getRefreshIcon());
         addNodeButton = new JButton(ZooInspectorIconResources.getAddNodeIcon());
-        deleteNodeButton = new JButton(ZooInspectorIconResources
-                .getDeleteNodeIcon());
-        nodeViewersButton = new JButton(ZooInspectorIconResources
-                .getChangeNodeViewersIcon());
-        aboutButton = new JButton(ZooInspectorIconResources
-                .getInformationIcon());
+        deleteNodeButton = new JButton(ZooInspectorIconResources.getDeleteNodeIcon());
+        nodeViewersButton = new JButton(ZooInspectorIconResources.getChangeNodeViewersIcon());
+        //exportButton = new JButton(ZooInspectorIconResources.getSaveIcon());
+        aboutButton = new JButton(ZooInspectorIconResources.getInformationIcon());
         toolbar.add(connectButton);
         toolbar.add(disconnectButton);
         toolbar.add(refreshButton);
@@ -130,6 +130,8 @@ public class ZooInspectorPanel extends JPanel implements
         addNodeButton.setEnabled(false);
         deleteNodeButton.setEnabled(false);
         nodeViewersButton.setEnabled(true);
+        //exportButton.setEnabled(true);
+        //exportButton.setToolTipText("export to .zk file");
         nodeViewersButton.setToolTipText("Change Node Viewers");
         aboutButton.setToolTipText("About ZooInspector");
         connectButton.setToolTipText("Connect");
@@ -144,6 +146,8 @@ public class ZooInspectorPanel extends JPanel implements
                         zooInspectorManager.getLastConnectionProps(),
                         zooInspectorManager.getConnectionPropertiesTemplate(),
                         ZooInspectorPanel.this);
+                Point position = ScreenWrapper.getWindowPosition(zicpd.getWidth(), zicpd.getHeight());
+                zicpd.setBounds(position.x, position.y, zicpd.getWidth(), zicpd.getHeight());
                 zicpd.setVisible(true);
             }
         });

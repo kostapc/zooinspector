@@ -595,7 +595,7 @@ public class ZooInspectorNodeViewersDialog extends JDialog implements
             } else {
                 upButton.setEnabled(true);
             }
-            if (index == ((DefaultListModel) viewersList.getModel()).getSize()) {
+            if (index == (viewersList.getModel()).getSize()) {
                 downButton.setEnabled(false);
             } else {
                 downButton.setEnabled(true);
