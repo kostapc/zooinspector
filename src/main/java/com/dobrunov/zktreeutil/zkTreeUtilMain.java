@@ -19,9 +19,10 @@
 
 package com.dobrunov.zktreeutil;
 
-import org.apache.commons.cli.*;
+//import org.apache.commons.cli.*;
 
 public class zkTreeUtilMain {
+    /* // this file really not used, but keep for allow easy git merge
     final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(zkTreeUtilMain.class);
 
     public static void main(String[] args) {
@@ -110,4 +111,5 @@ public class zkTreeUtilMain {
 
         return options;
     }
+    */
 }
