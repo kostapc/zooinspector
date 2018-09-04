@@ -23,7 +23,7 @@ import java.awt.event.WindowEvent;
 
 import javax.swing.*;
 
-import org.apache.zookeeper.inspector.gui.ScreenWrapper;
+import net.c0f3.zookeeper.ScreenWrapper;
 import org.apache.zookeeper.inspector.gui.ZooInspectorPanel;
 import org.apache.zookeeper.inspector.logger.LoggerFactory;
 import org.apache.zookeeper.inspector.manager.ZooInspectorManagerImpl;

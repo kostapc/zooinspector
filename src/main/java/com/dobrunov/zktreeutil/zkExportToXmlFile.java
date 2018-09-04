@@ -26,7 +26,7 @@ import javax.xml.transform.dom.*;
 import javax.xml.transform.stream.*;
 import org.w3c.dom.*;
 
-public class zkExportToXmlFile implements Job {
+public class zkExportToXmlFile implements zkTreeJob {
     private String zkServer;
     private String output_file;
     private String start_znode;

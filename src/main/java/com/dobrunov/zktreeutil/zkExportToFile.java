@@ -21,7 +21,7 @@ package com.dobrunov.zktreeutil;
 
 import java.io.*;
 
-public class zkExportToFile implements Job {
+public class zkExportToFile implements zkTreeJob {
     private String zkServer;
     private String output_file;
     private String start_znode;

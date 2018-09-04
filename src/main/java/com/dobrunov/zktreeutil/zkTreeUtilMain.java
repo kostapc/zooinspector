@@ -19,10 +19,10 @@
 
 package com.dobrunov.zktreeutil;
 
-//import org.apache.commons.cli.*;
+import org.apache.commons.cli.*;
 
 public class zkTreeUtilMain {
-    /* // this file really not used, but keep for allow easy git merge
+
     final org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(zkTreeUtilMain.class);
 
     public static void main(String[] args) {
@@ -34,14 +34,14 @@ public class zkTreeUtilMain {
         } catch (ParseException e) {
             usage(options);
         }
-        Job job = buildJob(options, cmd);
+        zkTreeJob job = buildJob(options, cmd);
         if (job != null) {
             job.go();
         }
     }
 
-    public static Job buildJob(Options options, CommandLine cmd) {
-        Job job = null;
+    public static zkTreeJob buildJob(Options options, CommandLine cmd) {
+        zkTreeJob job = null;
         if (!cmd.hasOption("z")) {
             usage(options);
         } else {
@@ -111,5 +111,4 @@ public class zkTreeUtilMain {
 
         return options;
     }
-    */
 }

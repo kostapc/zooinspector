@@ -34,10 +34,11 @@ import javax.swing.JSplitPane;
 import javax.swing.JToolBar;
 import javax.swing.SwingWorker;
 
+import net.c0f3.zookeeper.ScreenWrapper;
+import net.c0f3.zookeeper.ZKTreeExportDialogForm;
 import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooKeeper.States;
-import org.apache.zookeeper.inspector.ZooInspector;
 import org.apache.zookeeper.inspector.gui.nodeviewer.ZooInspectorNodeViewer;
 import org.apache.zookeeper.inspector.logger.LoggerFactory;
 import org.apache.zookeeper.inspector.manager.ZooInspectorManager;
@@ -56,7 +57,7 @@ public class ZooInspectorPanel extends JPanel implements NodeViewersChangeListen
     private final JButton deleteNodeButton;
     private final JButton nodeViewersButton;
     private final JButton aboutButton;
-    //private final JButton exportButton;
+    private final JButton exportButton;
     private final List<NodeViewersChangeListener> listeners = new ArrayList<NodeViewersChangeListener>();
     {
         listeners.add(this);
@@ -114,7 +115,7 @@ public class ZooInspectorPanel extends JPanel implements NodeViewersChangeListen
         addNodeButton = new JButton(ZooInspectorIconResources.getAddNodeIcon());
         deleteNodeButton = new JButton(ZooInspectorIconResources.getDeleteNodeIcon());
         nodeViewersButton = new JButton(ZooInspectorIconResources.getChangeNodeViewersIcon());
-        //exportButton = new JButton(ZooInspectorIconResources.getSaveIcon());
+        exportButton = new JButton(ZooInspectorIconResources.getSaveIcon());
         aboutButton = new JButton(ZooInspectorIconResources.getInformationIcon());
         toolbar.add(connectButton);
         toolbar.add(disconnectButton);
@@ -122,6 +123,7 @@ public class ZooInspectorPanel extends JPanel implements NodeViewersChangeListen
         toolbar.add(addNodeButton);
         toolbar.add(deleteNodeButton);
         toolbar.add(nodeViewersButton);
+        toolbar.add(exportButton);
         toolbar.add(aboutButton);
         aboutButton.setEnabled(true);
         connectButton.setEnabled(true);
@@ -130,8 +132,8 @@ public class ZooInspectorPanel extends JPanel implements NodeViewersChangeListen
         addNodeButton.setEnabled(false);
         deleteNodeButton.setEnabled(false);
         nodeViewersButton.setEnabled(true);
-        //exportButton.setEnabled(true);
-        //exportButton.setToolTipText("export to .zk file");
+        exportButton.setEnabled(false);
+        exportButton.setToolTipText("export to .zk file");
         nodeViewersButton.setToolTipText("Change Node Viewers");
         aboutButton.setToolTipText("About ZooInspector");
         connectButton.setToolTipText("Connect");
@@ -259,6 +261,22 @@ public class ZooInspectorPanel extends JPanel implements NodeViewersChangeListen
                 zicpd.setVisible(true);
             }
         });
+        exportButton.addActionListener((a)->{
+            ZKTreeExportDialogForm exportDialogForm = new ZKTreeExportDialogForm(
+                zooInspectorManager.getLastConnectionProps().get(ZooInspectorManager.CONNECT_STRING).toString()
+            );
+            exportDialogForm.pack();
+            Point position = ScreenWrapper.getWindowPosition(
+                exportDialogForm.getWidth(),
+                exportDialogForm.getHeight()
+            );
+            exportDialogForm.setBounds(
+                position.x, position.y,
+                exportDialogForm.getWidth(), exportDialogForm.getHeight()
+            );
+            exportDialogForm.setVisible(true);
+        });
+
         JScrollPane treeScroller = new JScrollPane(treeViewer);
         JSplitPane splitPane = new JSplitPane(JSplitPane.HORIZONTAL_SPLIT,
                 treeScroller, nodeViewersPanel);
@@ -308,7 +326,7 @@ public class ZooInspectorPanel extends JPanel implements NodeViewersChangeListen
                         refreshButton.setEnabled(true);
                         addNodeButton.setEnabled(true);
                         deleteNodeButton.setEnabled(true);
-
+                        exportButton.setEnabled(true);
                         // save successful connect string in default properties
                         zooInspectorManager.updateDefaultConnectionFile(connectionProps);
                     } else {

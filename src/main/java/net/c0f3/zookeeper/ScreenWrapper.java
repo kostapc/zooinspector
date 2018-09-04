@@ -1,4 +1,4 @@
-package org.apache.zookeeper.inspector.gui;
+package net.c0f3.zookeeper;
 
 import org.apache.zookeeper.inspector.logger.LoggerFactory;
 

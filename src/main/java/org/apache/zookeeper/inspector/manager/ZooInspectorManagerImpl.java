@@ -81,18 +81,6 @@ public class ZooInspectorManagerImpl implements ZooInspectorManager
   private static final String ACL_ID = "Id";
   private static final String SESSION_STATE = "Session State";
   private static final String SESSION_ID = "Session ID";
-  /**
-   * The key used for the connect string in the connection properties file
-   */
-  public static final String CONNECT_STRING = "hosts";
-  /**
-   * The key used for the session timeout in the connection properties file
-   */
-  public static final String SESSION_TIMEOUT = "timeout";
-  /**
-   * The key used for the data encryption manager in the connection properties file
-   */
-  public static final String DATA_ENCRYPTION_MANAGER = "encryptionManager";
 
   private static final String homeDir = System.getProperty("user.home");
   private static final File defaultNodeViewersFile =

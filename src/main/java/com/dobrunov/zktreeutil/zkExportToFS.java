@@ -25,7 +25,7 @@ import java.io.FileOutputStream;
 /**
  * Export zookeeper tree to file system
  */
-public class zkExportToFS implements Job {
+public class zkExportToFS implements zkTreeJob {
 
     private String zkServer;
     private String outputDir;
