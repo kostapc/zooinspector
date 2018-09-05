@@ -35,13 +35,13 @@ public class ZKTreeExport {
     zkTreeJob job;
     switch (format) {
       case ".zk":
-        job = new zkExportToFile(server, "/", file.getAbsolutePath());
+        job = new zkExportToFile(server, "", file.getAbsolutePath());
         break;
       case "XML":
-        job = new zkExportToXmlFile(server, "/", file.getAbsolutePath());
+        job = new zkExportToXmlFile(server, "", file.getAbsolutePath());
         break;
       case "folder":
-        job = new zkExportToFS(server, "/", file.getAbsolutePath());
+        job = new zkExportToFS(server, "", file.getAbsolutePath());
         break;
         default: job=()->{};
     }
