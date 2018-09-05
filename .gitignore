@@ -10,3 +10,4 @@ target/
 .settings/
 out/
 .DS_Store
+*.log

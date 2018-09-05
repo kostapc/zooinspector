@@ -233,7 +233,7 @@ public class NodeViewerData extends ZooInspectorNodeViewer {
       SwingWorker<String, Void> worker = new SwingWorker<String, Void>() {
 
         @Override
-        protected String doInBackground() throws Exception {
+        protected String doInBackground() {
           return NodeViewerData.this.zooInspectorManager.getData(NodeViewerData.this.selectedNode);
         }
 

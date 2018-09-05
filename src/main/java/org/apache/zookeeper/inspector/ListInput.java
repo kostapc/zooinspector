@@ -299,7 +299,7 @@ public class ListInput extends JPanel implements ListSelectionListener,
     
     f.pack();
     f.setSize(new Dimension(300, 200));
-    f.show();
+    f.setVisible(true);
 
   }
 

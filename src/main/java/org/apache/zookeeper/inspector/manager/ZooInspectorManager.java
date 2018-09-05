@@ -36,6 +36,19 @@ public interface ZooInspectorManager extends ZooInspectorNodeManager,
         ZooInspectorNodeTreeManager {
 
     /**
+     * The key used for the connect string in the connection properties file
+     */
+    String CONNECT_STRING = "hosts";
+    /**
+     * The key used for the session timeout in the connection properties file
+     */
+    String SESSION_TIMEOUT = "timeout";
+    /**
+     * The key used for the data encryption manager in the connection properties file
+     */
+    String DATA_ENCRYPTION_MANAGER = "encryptionManager";
+
+    /**
      * @param connectionProps
      * @return true if successfully connected
      */
