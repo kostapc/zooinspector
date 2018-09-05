@@ -3,6 +3,8 @@ zooinspector
 
 An improved zookeeper inspector
 
+- Supports export zookeeper data to .zk, XML and folder [https://github.com/ctapmex/zkTreeUtil]
+- centered GUI forms and dialogs
 - Use async operations to speed up read
 - Znodes sorted by names in tree viewer
 - Timestamp and session id in more readable format in node metadata viewer
@@ -11,7 +13,7 @@ An improved zookeeper inspector
 - Support read-only mode for node data viewer
 
 Build
-- $git clone https://github.com/zzhang5/zooinspector.git
+- $git clone https://github.com/c0f3/zooinspector
 - $cd zooinspector/
 - $mvn clean package
 
