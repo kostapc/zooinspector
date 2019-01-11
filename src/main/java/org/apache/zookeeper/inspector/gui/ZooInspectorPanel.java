@@ -220,19 +220,15 @@ public class ZooInspectorPanel extends JPanel implements NodeViewersChangeListen
                             @Override
                             protected Boolean doInBackground() throws Exception {
                                 for (String nodePath : selectedNodes) {
-                                    boolean result = ZooInspectorPanel.this.zooInspectorManager
+                                    ZooInspectorPanel.this.zooInspectorManager
                                             .deleteNode(nodePath);
-                                    if (!result) {
-                                      return false;
-                                    }
                                 }
                                 return true;
                             }
 
                             @Override
                             protected void done() {
-//                                treeViewer.refreshView();
-
+                              //treeViewer.refreshView();
                               treeViewer.refreshViewAfterDelete(selectedNodes);
                             }
                         };
@@ -306,9 +302,6 @@ public class ZooInspectorPanel extends JPanel implements NodeViewersChangeListen
                             deleteNodeButton.setEnabled(false);
                             nodeViewersPanel.setEnabled(false);
                             connectedHost.disconnected();
-                            JOptionPane.showMessageDialog(null,
-                                    "lost connection to zookeeper", "Error",
-                                    JOptionPane.ERROR_MESSAGE);
                         }
                     }
                 });
@@ -385,13 +378,7 @@ public class ZooInspectorPanel extends JPanel implements NodeViewersChangeListen
                         deleteNodeButton.setEnabled(false);
                         connectedHost.disconnected();
                     }
-                } catch (InterruptedException e) {
-                    LoggerFactory
-                            .getLogger()
-                            .error(
-                                    "Error occurred while disconnecting from ZooKeeper server",
-                                    e);
-                } catch (ExecutionException e) {
+                } catch (InterruptedException | ExecutionException e) {
                     LoggerFactory
                             .getLogger()
                             .error(

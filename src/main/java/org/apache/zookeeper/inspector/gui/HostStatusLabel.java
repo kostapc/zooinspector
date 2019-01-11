@@ -19,10 +19,11 @@ public class HostStatusLabel extends JLabel {
 
   public void connected(String host) {
     this.setText(host);
-    this.setForeground(Color.green);
+    this.setForeground(new Color(9,137,0));
   }
 
   public void disconnected() {
-    this.setText("");
+    this.setText("disconnected from "+this.getText());
+    this.setForeground(Color.RED);
   }
 }
