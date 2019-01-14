@@ -1,6 +1,8 @@
 zooinspector
 ============
 
+current version: __1.1-SNAPSHOT__
+
 An improved zookeeper inspector
 
 - Use async operations to speed up read
@@ -16,5 +18,4 @@ Build
 - $mvn clean package
 
 Run
-- $chmod +x target/zooinspector-pkg/bin/zooinspector.sh
-- $target/zooinspector-pkg/bin/zooinspector.sh
+- java -jar target/zooinspector-1.1-SNAPSHOT-jar-with-dependencies.jar
