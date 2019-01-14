@@ -1,9 +1,12 @@
 zooinspector
 ============
 
+current version: __1.1-SNAPSHOT__
+
 An improved zookeeper inspector
 
-- Supports export zookeeper data to .zk, XML and folder [https://github.com/ctapmex/zkTreeUtil]
+- Supports export zookeeper data to .zk, XML and folder [ctapmex/zkTreeUtil][1]
+- - planned ability to restore dump from file: [fork kostapc/zkTreeUtil][2]
 - centered GUI forms and dialogs
 - Use async operations to speed up read
 - Znodes sorted by names in tree viewer
@@ -18,5 +21,7 @@ Build
 - $mvn clean package
 
 Run
-- $chmod +x target/zooinspector-pkg/bin/zooinspector.sh
-- $target/zooinspector-pkg/bin/zooinspector.sh
+- java -jar target/zooinspector-1.1-SNAPSHOT-jar-with-dependencies.jar
+
+[1]: https://github.com/ctapmex/zkTreeUtil
+[2]: https://github.com/kostapc/zkTreeUtil
