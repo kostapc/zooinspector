@@ -5,7 +5,7 @@ current version: __1.1-SNAPSHOT__
 
 An improved zookeeper inspector
 
-- single executable jar, java8
+- single executable jar, java8, ZooKeeper 3.4.13
 - Supports export zookeeper data to .zk, XML and folder [ctapmex/zkTreeUtil][1]
   (planned ability to restore dump from file: [fork kostapc/zkTreeUtil][2])
 - centered GUI forms and dialogs

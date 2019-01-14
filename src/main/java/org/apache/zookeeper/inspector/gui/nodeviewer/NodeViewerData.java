@@ -235,36 +235,27 @@ public class NodeViewerData extends ZooInspectorNodeViewer {
     // Add editor theme selector
     String[] themes = { "default", "dark", "eclipse", "idea", "monokai", "vs" };
     JComboBox cmbThemes = new JComboBox(themes);
-    cmbThemes.setSelectedIndex(0);
-    cmbThemes.addActionListener(new ActionListener() {
-
-      public void actionPerformed(ActionEvent e) {
-        JComboBox cb = (JComboBox)e.getSource();
-        String themeName = (String)cb.getSelectedItem();
-        try {
-          String themePath = String.format("/org/fife/ui/rsyntaxtextarea/themes/%s.xml", themeName);
-          Theme theme = Theme.load(getClass().getResourceAsStream(themePath));
-          theme.apply(dataArea);
-        } catch (IOException ioe) { // Never happens
-          ioe.printStackTrace();
-        }   
-      }
+    cmbThemes.setPreferredSize(new Dimension(200, 24));
+    cmbThemes.setMaximumSize(new Dimension(200, 24));
+    cmbThemes.setMinimumSize(new Dimension(200, 24));
+    cmbThemes.setSelectedIndex(1);
+    applyTheme((String)cmbThemes.getSelectedItem());
+    cmbThemes.addActionListener(e -> {
+      JComboBox cb = (JComboBox)e.getSource();
+      applyTheme((String)cb.getSelectedItem());
     });
     this.toolbar.add(cmbThemes);
 
-    cmbThemes.setPreferredSize(new Dimension(200, 24));
-    
-    // TODO: There's gotta be a better way to shrink the size of the Theme combo box
-    this.toolbar.add(new JPanel());
-    this.toolbar.add(new JPanel());
-    this.toolbar.add(new JPanel());
-    this.toolbar.add(new JPanel());
-    this.toolbar.add(new JPanel());
-    this.toolbar.add(new JPanel());
-    this.toolbar.add(new JPanel());
-    this.toolbar.add(new JPanel());
-    this.toolbar.add(new JPanel());
+  }
 
+  private void applyTheme(String themeName) {
+    try {
+      String themePath = String.format("/org/fife/ui/rsyntaxtextarea/themes/%s.xml", themeName);
+      Theme theme = Theme.load(getClass().getResourceAsStream(themePath));
+      theme.apply(dataArea);
+    } catch (IOException ioe) { // Never happens
+      ioe.printStackTrace();
+    }
   }
 
   /*
