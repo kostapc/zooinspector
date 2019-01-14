@@ -7,6 +7,7 @@ An improved zookeeper inspector
 
 - Supports export zookeeper data to .zk, XML and folder [ctapmex/zkTreeUtil][1]
 - - planned ability to restore dump from file: [fork kostapc/zkTreeUtil][2]
+- centered GUI forms and dialogs
 - Use async operations to speed up read
 - Znodes sorted by names in tree viewer
 - Timestamp and session id in more readable format in node metadata viewer
