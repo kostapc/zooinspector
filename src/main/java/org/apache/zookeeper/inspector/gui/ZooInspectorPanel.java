@@ -19,7 +19,6 @@ package org.apache.zookeeper.inspector.gui;
 
 import net.c0f3.zookeeper.ScreenWrapper;
 import net.c0f3.zookeeper.ZKTreeExportDialogForm;
-import org.apache.zookeeper.WatchedEvent;
 import org.apache.zookeeper.Watcher;
 import org.apache.zookeeper.ZooKeeper.States;
 import org.apache.zookeeper.inspector.gui.nodeviewer.ZooInspectorNodeViewer;
@@ -253,6 +252,13 @@ public class ZooInspectorPanel extends JPanel implements NodeViewersChangeListen
       public void actionPerformed(ActionEvent e) {
         ZooInspectorAboutDialog zicpd = new ZooInspectorAboutDialog(
             JOptionPane.getRootFrame());
+        Point position = ScreenWrapper.getWindowPosition(
+            zicpd.getWidth(), zicpd.getHeight()
+        );
+        zicpd.setBounds(
+            position.x, position.y,
+            zicpd.getWidth(), zicpd.getHeight()
+        );
         zicpd.setVisible(true);
       }
     });
@@ -291,19 +297,16 @@ public class ZooInspectorPanel extends JPanel implements NodeViewersChangeListen
       @Override
       protected Boolean doInBackground() throws Exception {
         zooInspectorManager.setLastConnectionProps(connectionProps);
-        return zooInspectorManager.connect(connectionProps, new Watcher() {
-          @Override
-          public void process(WatchedEvent event) {
-            if (event.getState() == Event.KeeperState.Disconnected) {
-              treeViewer.refreshView();
-              connectButton.setEnabled(true);
-              disconnectButton.setEnabled(false);
-              refreshButton.setEnabled(false);
-              addNodeButton.setEnabled(false);
-              deleteNodeButton.setEnabled(false);
-              nodeViewersPanel.setEnabled(false);
-              connectedHost.disconnected();
-            }
+        return zooInspectorManager.connect(connectionProps, event -> {
+          if (event.getState() == Watcher.Event.KeeperState.Disconnected) {
+            treeViewer.refreshView();
+            connectButton.setEnabled(true);
+            disconnectButton.setEnabled(false);
+            refreshButton.setEnabled(false);
+            addNodeButton.setEnabled(false);
+            deleteNodeButton.setEnabled(false);
+            nodeViewersPanel.setEnabled(false);
+            connectedHost.disconnected();
           }
         });
       }

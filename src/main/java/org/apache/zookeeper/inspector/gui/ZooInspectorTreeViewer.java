@@ -33,8 +33,6 @@ import javax.swing.tree.DefaultTreeModel;
 import javax.swing.tree.TreeNode;
 import javax.swing.tree.TreePath;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.io.File;
@@ -86,24 +84,18 @@ public class ZooInspectorTreeViewer extends JPanel implements NodeListener,
     this.toasterManager.setBorderColor(Color.BLACK);
     this.toasterManager.setMessageColor(Color.BLACK);
     this.toasterManager.setToasterColor(Color.WHITE);
-    addNotify.addActionListener(new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        System.out.println("addNotify action_performed()");
-        List<String> selectedNodes = getSelectedNodes();
-        zooInspectorManager.addWatchers(selectedNodes,
-            ZooInspectorTreeViewer.this);
-      }
+    addNotify.addActionListener(e -> {
+      System.out.println("addNotify action_performed()");
+      List<String> selectedNodes = getSelectedNodes();
+      zooInspectorManager.addWatchers(selectedNodes,
+          ZooInspectorTreeViewer.this);
     });
     final JMenuItem removeNotify = new JMenuItem(
         "Remove Change Notification");
-    removeNotify.addActionListener(new ActionListener() {
-      @Override
-      public void actionPerformed(ActionEvent e) {
-        System.out.println("removeNotify actionPerformed()");
-        List<String> selectedNodes = getSelectedNodes();
-        zooInspectorManager.removeWatchers(selectedNodes);
-      }
+    removeNotify.addActionListener(e -> {
+      System.out.println("removeNotify actionPerformed()");
+      List<String> selectedNodes = getSelectedNodes();
+      zooInspectorManager.removeWatchers(selectedNodes);
     });
 
     tree = new JTree(new DefaultMutableTreeNode());
@@ -184,7 +176,6 @@ public class ZooInspectorTreeViewer extends JPanel implements NodeListener,
 //      final TreePath[] selectedNodes = tree.getSelectionPaths();
     System.out.println("\texpandedNodes: " + expandedNodes);
 
-
     SwingWorker<Boolean, Void> worker = new SwingWorker<Boolean, Void>() {
 
       @Override
@@ -218,7 +209,7 @@ public class ZooInspectorTreeViewer extends JPanel implements NodeListener,
 //      }
 
 //        final Set<TreePath> expandedNodes = new LinkedHashSet<TreePath>();
-    List<String> visiblePaths = new ArrayList<String>();
+    List<String> visiblePaths = new ArrayList<>();
 
 //        List<String> selectedPaths = new ArrayList<String>();
     int rowCount = tree.getRowCount();
